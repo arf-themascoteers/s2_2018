@@ -32,7 +32,7 @@ def merge_scene(this_csv_path):
     else:
         complete_df = pd.read_csv(COMPLETE_CSV)
         complete_df = pd.concat([complete_df, this_df], ignore_index=True)
-    complete_df.to_csv(COMPLETE_CSV)
+    complete_df.to_csv(COMPLETE_CSV, index=False)
 
 
 def find_tiff(tiffs, band):
