@@ -19,8 +19,9 @@ BANDS = ["B01",
          "B09",
          "B11",
          "B12",
-         "EVI",
          "NDVI",
+         "SAVI",
+         "EVI",
          "Agriculture"
          ]
 
