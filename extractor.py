@@ -112,7 +112,9 @@ def sanitize(df):
 
 
 def process_all_scenes():
-    process_all_scenes()
+    for scene in os.listdir(SCENE_PATH):
+        process_scene(scene)
+        merge_scene(scene)
 
 
 if __name__ == "__main__":
