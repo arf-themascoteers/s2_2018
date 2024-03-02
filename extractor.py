@@ -71,7 +71,7 @@ def get_band_values(scene, band):
 
 
 def merge_bands(all_bands_pixels_df, band, band_pixels):
-    band_df = pd.DataFrame(band_pixels, columns=["lat","lon","POINTID","oc",band])
+    band_df = pd.DataFrame(band_pixels, columns=["POINTID","lat","lon","oc",band])
     if all_bands_pixels_df is None:
         return band_df
     all_bands_pixels_df = pd.merge(all_bands_pixels_df, band_df[["POINTID",band]], on="POINTID")
@@ -90,7 +90,7 @@ def process_scene(scene):
     all_bands_pixels_df = sanitize(all_bands_pixels_df)
     this_csv_path = os.path.join(CSVS_PATH, f"{scene}.csv")
     all_bands_pixels_df.to_csv(this_csv_path, index=False)
-    merge_scene(this_csv_path)
+    return this_csv_path
 
 
 def sanitize(df):
@@ -113,8 +113,8 @@ def sanitize(df):
 
 def process_all_scenes():
     for scene in os.listdir(SCENE_PATH):
-        process_scene(scene)
-        merge_scene(scene)
+        this_csv_path = process_scene(scene)
+        merge_scene(this_csv_path)
 
 
 if __name__ == "__main__":
