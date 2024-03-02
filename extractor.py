@@ -28,10 +28,11 @@ BANDS = ["B01",
 def merge_scene(this_csv_path):
     this_df = pd.read_csv(this_csv_path)
     if not os.path.exists(COMPLETE_CSV):
-        return this_df
-    complete_df = pd.read_csv(COMPLETE_CSV)
-    complete_df = pd.concat([complete_df, this_df], ignore_index=True)
-    return complete_df
+        complete_df = this_df
+    else:
+        complete_df = pd.read_csv(COMPLETE_CSV)
+        complete_df = pd.concat([complete_df, this_df], ignore_index=True)
+    complete_df.to_csv(COMPLETE_CSV)
 
 
 def find_tiff(tiffs, band):
